@@ -63,11 +63,55 @@
       color: #161616;
     }
 
+    .north-star-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      padding: 2rem 2rem 1rem 2rem;
+      background-color: #f4f4f4;
+    }
+
+    .metric-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: #525252;
+      font-weight: 600;
+      letter-spacing: 0.32px;
+      text-transform: uppercase;
+    }
+
+    .metric-input {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      border: 1px solid #8d8d8d;
+      background-color: #ffffff;
+      color: #161616;
+      border-radius: 0;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .metric-input:focus {
+      border-color: #0f62fe;
+      border-width: 2px;
+      padding: calc(0.75rem - 1px) calc(1rem - 1px);
+    }
+
+    .metric-input::placeholder {
+      color: #a8a8a8;
+    }
+
     .summary-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
-      padding: 2rem;
+      padding: 1rem 2rem 2rem 2rem;
       background-color: #f4f4f4;
     }
 
@@ -269,6 +313,70 @@
       align-items: center;
       gap: 8px;
     }
+
+    .metrics-section {
+      padding: 2rem;
+      background-color: #f4f4f4;
+      margin-top: 2rem;
+    }
+
+    .metrics-title {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: #161616;
+      margin: 0 0 1.5rem 0;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .metric-cell-input {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 0.875rem;
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      border: 1px solid #e0e0e0;
+      background-color: #ffffff;
+      color: #161616;
+      border-radius: 0;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .metric-cell-input:focus {
+      border-color: #0f62fe;
+      border-width: 2px;
+      padding: calc(0.5rem - 1px);
+    }
+
+    .metric-textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 0.5rem;
+      font-size: 0.875rem;
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      border: 1px solid #e0e0e0;
+      background-color: #ffffff;
+      color: #161616;
+      border-radius: 0;
+      outline: none;
+      resize: vertical;
+      transition: border-color 0.2s;
+    }
+
+    .metric-textarea:focus {
+      border-color: #0f62fe;
+      border-width: 2px;
+      padding: calc(0.5rem - 1px);
+    }
+
+    .metrics-section table td {
+      vertical-align: middle;
+    }
+
+    .metrics-section input[type="number"]::-webkit-inner-spin-button,
+    .metrics-section input[type="number"]::-webkit-outer-spin-button {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -285,6 +393,17 @@
       <button class="tab" onclick="filterProducts('Demeter-All')">Demeter-All</button>
       <button class="tab" onclick="filterProducts('Security')">Security</button>
       <button class="tab" onclick="filterProducts('Infrastructure Mgmt')">Infrastructure Mgmt</button>
+    </div>
+
+    <div class="north-star-metrics">
+      <div class="metric-input-group">
+        <label for="northStarZ" class="metric-label">NORTH STAR METRIC Z</label>
+        <input type="text" id="northStarZ" class="metric-input" placeholder="Enter metric value">
+      </div>
+      <div class="metric-input-group">
+        <label for="northStarLinuxONE" class="metric-label">NORTH STAR METRIC LINUXONE</label>
+        <input type="text" id="northStarLinuxONE" class="metric-input" placeholder="Enter metric value">
+      </div>
     </div>
 
     <div class="summary-cards">
@@ -322,6 +441,68 @@
           <!-- Products will be inserted here by JavaScript -->
         </tbody>
       </table>
+    </div>
+
+    <!-- Rhea-Specific Metrics Table -->
+    <div class="metrics-section">
+      <h2 class="metrics-title">Rhea-Specific Metrics</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>METRIC</th>
+              <th>VALUE</th>
+              <th>NOTES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. # of User-Driven Outcomes</strong></td>
+              <td><input type="text" class="metric-cell-input" placeholder="Enter value"></td>
+              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 2rem;">a. # of Roadmap Pivots</td>
+              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
+              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 2rem;">b. # of Enhancements Added</td>
+              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
+              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 2rem;">c. # of Innovations Added</td>
+              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
+              <td><input type="text" class="metric-cell-input" placeholder="How do you measure this?"></td>
+            </tr>
+            <tr>
+              <td><strong>2. # of Reference Candidates</strong></td>
+              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
+              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+            </tr>
+            <tr>
+              <td><strong>3. Sponsor User Companies, Industry, Geos</strong></td>
+              <td colspan="2"><textarea class="metric-textarea" placeholder="Enter sponsor user companies, industries, and geographic locations"></textarea></td>
+            </tr>
+            <tr>
+              <td><strong>4. # of SU Engaged</strong></td>
+              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
+              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+            </tr>
+            <tr>
+              <td><strong>5. # of Engagements</strong></td>
+              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
+              <td><input type="text" class="metric-cell-input" placeholder="Research hours?"></td>
+            </tr>
+            <tr>
+              <td><strong>6. # of Clients in Top 80% Rev List</strong></td>
+              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
+              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
