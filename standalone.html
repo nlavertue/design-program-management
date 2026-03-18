@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Program Management - Carbon Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/carbon-components@10.59.2/css/carbon-components.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .app-container {
+      min-height: 100vh;
+      background-color: #ffffff;
+    }
+
+    .header {
+      padding: 2rem 2rem 1rem 2rem;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 400;
+      color: #161616;
+    }
+
+    .tabs {
+      padding: 0 2rem;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      gap: 0;
+    }
+
+    .tab {
+      padding: 1rem 1.5rem;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: #525252;
+      transition: all 0.2s;
+    }
+
+    .tab:hover {
+      background-color: #e5e5e5;
+    }
+
+    .tab.active {
+      border-bottom-color: #0f62fe;
+      color: #161616;
+    }
+
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+
+    .summary-card {
+      padding: 1.5rem;
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+    }
+
+    .summary-label {
+      font-size: 0.75rem;
+      color: #525252;
+      font-weight: 600;
+      letter-spacing: 0.32px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .summary-value {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: #161616;
+      line-height: 1;
+    }
+
+    .summary-value.red {
+      color: #da1e28;
+    }
+
+    .table-container {
+      padding: 0 2rem 2rem 2rem;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #ffffff;
+    }
+
+    thead {
+      background-color: #e0e0e0;
+    }
+
+    th {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.32px;
+      text-transform: uppercase;
+      color: #161616;
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #e0e0e0;
+      color: #161616;
+      font-size: 0.875rem;
+    }
+
+    tbody tr:hover {
+      background-color: #e5e5e5;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 0.5rem;
+      height: 1.5rem;
+      font-size: 0.75rem;
+      font-weight: 400;
+      border-radius: 0.9375rem;
+      white-space: nowrap;
+    }
+
+    .tag-green {
+      background-color: #d4f1d4;
+      color: #0f6212;
+    }
+
+    .tag-yellow {
+      background-color: #fcf4d6;
+      color: #684e00;
+    }
+
+    .tag-red {
+      background-color: #ffd7d9;
+      color: #750e13;
+    }
+
+    .tag-gray {
+      background-color: #e0e0e0;
+      color: #161616;
+    }
+
+    .tag-cyan {
+      background-color: #bae6ff;
+      color: #003a6d;
+    }
+
+    .team-avatars {
+      display: flex;
+      gap: 4px;
+    }
+
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #8d8d8d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+    }
+
+    .tat-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .arrow-down {
+      color: #24a148;
+    }
+
+    .arrow-up {
+      color: #da1e28;
+    }
+
+    .maturity-score {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .maturity-high {
+      color: #24a148;
+    }
+
+    .maturity-medium {
+      color: #f1c21b;
+    }
+
+    .maturity-low {
+      color: #da1e28;
+    }
+
+    .design-lead {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="header">
+      <h1>Design Program Management</h1>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="filterProducts('all')">All Products</button>
+      <button class="tab" onclick="filterProducts('wp')">WP Pilot</button>
+      <button class="tab" onclick="filterProducts('non-pilot')">Non-Pilot</button>
+      <button class="tab" onclick="filterProducts('rhea')">Rhea</button>
+    </div>
+
+    <div class="summary-cards">
+      <div class="summary-card">
+        <div class="summary-label">TOTAL PRODUCTS</div>
+        <div class="summary-value">18</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">RHEA</div>
+        <div class="summary-value">7</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">UNDOCUMENTED MARKERS</div>
+        <div class="summary-value red">8</div>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>PRODUCT</th>
+            <th>PARENT</th>
+            <th>DESIGN LEAD</th>
+            <th>DESIGN TEAM</th>
+            <th>DESIGN GAPS</th>
+            <th>STAKEHOLDER MAP HEALTH</th>
+            <th>TEAM MATURITY</th>
+            <th>DESIGN-DEV TAT</th>
+            <th>CUSTOMER INTERACTION</th>
+            <th>EXPERIENCE ARCHITECTURE MATURITY</th>
+          </tr>
+        </thead>
+        <tbody id="productTable">
+          <!-- Products will be inserted here by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      { product: 'I/O Topology', parent: 'GRAVITY', designTeam: 3, designGaps: 5, health: 'STRONG', maturity: 'ESTABLISHED', tat: '12 days', trend: 'down', interaction: 'FRESH', score: 4 },
+      { product: 'ICIC', parent: 'GRAVITY', designTeam: 2, designGaps: 8, health: 'MODERATE', maturity: 'DEVELOPING', tat: '18 days', trend: 'up', interaction: 'STALE', score: 2 },
+      { product: 'Provable Value', parent: 'RHEA', designTeam: 5, designGaps: 2, health: 'STRONG', maturity: 'LEADING', tat: '8 days', trend: 'down', interaction: 'FRESH', score: 5 },
+      { product: 'Commercial Experience', parent: 'RHEA', designTeam: 4, designGaps: 12, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '25 days', trend: 'up', interaction: 'STALE', score: 1 },
+      { product: 'Application Control Center', parent: 'RHEA', designTeam: 3, designGaps: 6, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '14 days', trend: 'down', interaction: 'FRESH', score: 3 },
+      { product: 'IBM Z Next', parent: 'RHEA', designTeam: 5, designGaps: 3, health: 'STRONG', maturity: 'ADVANCED', tat: '10 days', trend: 'down', interaction: 'FRESH', score: 4 },
+      { product: 'IBM LinuxONE Next', parent: 'RHEA', designTeam: 4, designGaps: 4, health: 'STRONG', maturity: 'ADVANCED', tat: '11 days', trend: 'down', interaction: 'FRESH', score: 4 },
+      { product: 'Infrastructure Foundation', parent: 'RHEA/DEMETER', designTeam: 2, designGaps: 9, health: 'MODERATE', maturity: 'DEVELOPING', tat: '20 days', trend: 'up', interaction: 'STALE', score: 2 },
+      { product: 'Crypto-Simplification', parent: 'SECURITY', designTeam: 3, designGaps: 7, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '15 days', trend: 'down', interaction: 'FRESH', score: 3 },
+      { product: 'Crypto-Inventory and Discovery', parent: 'SECURITY', designTeam: 2, designGaps: 10, health: 'WEAK', maturity: 'DEVELOPING', tat: '22 days', trend: 'up', interaction: 'STALE', score: 2 },
+      { product: 'Haven', parent: 'SECURITY', designTeam: 1, designGaps: 15, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '30 days', trend: 'up', interaction: 'STALE', score: 0 },
+      { product: 'Regulated Digital Assets', parent: 'SECURITY', designTeam: 4, designGaps: 4, health: 'STRONG', maturity: 'ESTABLISHED', tat: '13 days', trend: 'down', interaction: 'FRESH', score: 4 },
+      { product: 'Confidential Computing', parent: 'SECURITY', designTeam: 5, designGaps: 2, health: 'STRONG', maturity: 'LEADING', tat: '9 days', trend: 'down', interaction: 'FRESH', score: 5 },
+      { product: 'Gekko', parent: 'NZLI', designTeam: 2, designGaps: 14, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '28 days', trend: 'up', interaction: 'STALE', score: 1 },
+      { product: 'Content Overhaul', parent: 'NZLI', designTeam: 4, designGaps: 1, health: 'STRONG', maturity: 'LEADING', tat: '7 days', trend: 'down', interaction: 'FRESH', score: 5 },
+      { product: 'AI Assistant', parent: 'NZLI', designTeam: 3, designGaps: 6, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '16 days', trend: 'down', interaction: 'FRESH', score: 3 },
+      { product: 'Demo Portal', parent: 'NZLI', designTeam: 2, designGaps: 8, health: 'MODERATE', maturity: 'DEVELOPING', tat: '19 days', trend: 'up', interaction: 'STALE', score: 2 },
+      { product: 'Digital Sovereignty', parent: 'L1', designTeam: 3, designGaps: 7, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '17 days', trend: 'down', interaction: 'FRESH', score: 3 }
+    ];
+
+    function getHealthTag(health) {
+      const colors = { 'STRONG': 'green', 'MODERATE': 'yellow', 'WEAK': 'red' };
+      return `<span class="tag tag-${colors[health]}">${health}</span>`;
+    }
+
+    function getMaturityTag(maturity) {
+      const colors = { 'LEADING': 'cyan', 'ADVANCED': 'cyan', 'ESTABLISHED': 'gray', 'DEVELOPING': 'gray', 'FOUNDATIONAL': 'gray' };
+      return `<span class="tag tag-${colors[maturity]}">${maturity}</span>`;
+    }
+
+    function getInteractionTag(interaction) {
+      const colors = { 'FRESH': 'green', 'STALE': 'gray' };
+      return `<span class="tag tag-${colors[interaction]}">${interaction}</span>`;
+    }
+
+    function renderProducts(filter = 'all') {
+      const tbody = document.getElementById('productTable');
+      let filtered = products;
+      
+      if (filter === 'wp') {
+        filtered = products.filter(p => p.parent.includes('WP'));
+      } else if (filter === 'non-pilot') {
+        filtered = products.filter(p => !p.parent.includes('WP') && !p.parent.includes('RHEA'));
+      } else if (filter === 'rhea') {
+        filtered = products.filter(p => p.parent.includes('RHEA'));
+      }
+
+      tbody.innerHTML = filtered.map(p => `
+        <tr>
+          <td>${p.product}</td>
+          <td><span class="tag tag-gray">${p.parent}</span></td>
+          <td>
+            <div class="design-lead">
+              <div class="avatar">👤</div>
+              <span>Design Lead</span>
+            </div>
+          </td>
+          <td>
+            <div class="team-avatars">
+              ${Array.from({length: p.designTeam}).map(() => '<div class="avatar">👤</div>').join('')}
+            </div>
+          </td>
+          <td>${p.designGaps}</td>
+          <td>${getHealthTag(p.health)}</td>
+          <td>${getMaturityTag(p.maturity)}</td>
+          <td>
+            <div class="tat-cell">
+              <span>${p.tat}</span>
+              <span class="arrow-${p.trend}">${p.trend === 'down' ? '↓' : '↑'}</span>
+            </div>
+          </td>
+          <td>${getInteractionTag(p.interaction)}</td>
+          <td>
+            <span class="maturity-score maturity-${p.score >= 4 ? 'high' : p.score >= 3 ? 'medium' : 'low'}">
+              ${p.score}
+            </span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterProducts(filter) {
+      // Update active tab
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Render filtered products
+      renderProducts(filter);
+    }
+
+    // Initial render
+    renderProducts();
+  </script>
+</body>
+</html>
