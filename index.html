@@ -279,9 +279,12 @@
 
     <div class="tabs">
       <button class="tab active" onclick="filterProducts('all')">All Products</button>
-      <button class="tab" onclick="filterProducts('wp')">WP Pilot</button>
-      <button class="tab" onclick="filterProducts('non-pilot')">Non-Pilot</button>
-      <button class="tab" onclick="filterProducts('rhea')">Rhea</button>
+      <button class="tab" onclick="filterProducts('Rhea-Z')">Rhea-Z</button>
+      <button class="tab" onclick="filterProducts('Rhea-LinuxONE')">Rhea-LinuxONE</button>
+      <button class="tab" onclick="filterProducts('Rhea-All')">Rhea-All</button>
+      <button class="tab" onclick="filterProducts('Demeter-All')">Demeter-All</button>
+      <button class="tab" onclick="filterProducts('Security')">Security</button>
+      <button class="tab" onclick="filterProducts('Infrastructure Mgmt')">Infrastructure Mgmt</button>
     </div>
 
     <div class="summary-cards">
@@ -304,7 +307,7 @@
         <thead>
           <tr>
             <th class="sortable" onclick="sortTable('product')">PRODUCT</th>
-            <th class="sortable" onclick="sortTable('parent')">PARENT</th>
+            <th class="sortable" onclick="sortTable('tags')">TAGS</th>
             <th>DESIGN LEAD</th>
             <th>DESIGN TEAM</th>
             <th class="sortable" onclick="sortTable('designGaps')">DESIGN GAPS</th>
@@ -324,24 +327,24 @@
 
   <script>
     let products = [
-      { product: 'I/O Topology', parent: 'GRAVITY', designTeam: 3, designGaps: 1, health: 'STRONG', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 4 },
-      { product: 'ICIC', parent: 'GRAVITY', designTeam: 2, designGaps: 2, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2 },
-      { product: 'Provable Value', parent: 'RHEA', designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '5 days', tatDays: 5, trend: 'down', interaction: 'FRESH', score: 5 },
-      { product: 'Commercial Experience', parent: 'RHEA', designTeam: 4, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '1 month', tatDays: 30, trend: 'up', interaction: 'STALE', score: 1 },
-      { product: 'Application Control Center', parent: 'RHEA', designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '10 days', tatDays: 10, trend: 'down', interaction: 'FRESH', score: 3 },
-      { product: 'IBM Z Next', parent: 'RHEA', designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'ADVANCED', tat: '1 week', tatDays: 7, trend: 'down', interaction: 'FRESH', score: 4 },
-      { product: 'IBM LinuxONE Next', parent: 'RHEA', designTeam: 4, designGaps: 1, health: 'STRONG', maturity: 'ADVANCED', tat: '8 days', tatDays: 8, trend: 'down', interaction: 'FRESH', score: 4 },
-      { product: 'Infrastructure Foundation', parent: 'RHEA/DEMETER', designTeam: 2, designGaps: 2, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2 },
-      { product: 'Crypto-Simplification', parent: 'SECURITY', designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3 },
-      { product: 'Crypto-Inventory and Discovery', parent: 'SECURITY', designTeam: 2, designGaps: 2, health: 'WEAK', maturity: 'DEVELOPING', tat: '4 weeks', tatDays: 28, trend: 'up', interaction: 'STALE', score: 2 },
-      { product: 'Haven', parent: 'SECURITY', designTeam: 1, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '6 weeks', tatDays: 42, trend: 'up', interaction: 'STALE', score: 0 },
-      { product: 'Regulated Digital Assets', parent: 'SECURITY', designTeam: 4, designGaps: 0, health: 'STRONG', maturity: 'ESTABLISHED', tat: '9 days', tatDays: 9, trend: 'down', interaction: 'FRESH', score: 4 },
-      { product: 'Confidential Computing', parent: 'SECURITY', designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '6 days', tatDays: 6, trend: 'down', interaction: 'FRESH', score: 5 },
-      { product: 'Canton', parent: 'New to LinuxONE', designTeam: 2, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '1 month', tatDays: 30, trend: 'up', interaction: 'STALE', score: 1 },
-      { product: 'Content Overhaul', parent: 'New to LinuxONE', designTeam: 4, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '4 days', tatDays: 4, trend: 'down', interaction: 'FRESH', score: 5 },
-      { product: 'AI Assistant', parent: 'New to LinuxONE', designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3 },
-      { product: 'Getting Started', parent: 'New to LinuxONE', designTeam: 2, designGaps: 1, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2 },
-      { product: 'Digital Sovereignty', parent: 'LinuxONE', designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3 }
+      { product: 'AI Assistant', tags: ['Rhea-All'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3 },
+      { product: 'Application Control Center', tags: ['Rhea-All'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '10 days', tatDays: 10, trend: 'down', interaction: 'FRESH', score: 3 },
+      { product: 'Canton', tags: ['Rhea-LinuxONE'], designTeam: 2, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '1 month', tatDays: 30, trend: 'up', interaction: 'STALE', score: 1 },
+      { product: 'Commercial Experience', tags: ['Rhea-All'], designTeam: 4, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '1 month', tatDays: 30, trend: 'up', interaction: 'STALE', score: 1 },
+      { product: 'Confidential Computing', tags: ['Rhea-All', 'Security'], designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '6 days', tatDays: 6, trend: 'down', interaction: 'FRESH', score: 5 },
+      { product: 'Content Overhaul', tags: ['Rhea-LinuxONE'], designTeam: 4, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '4 days', tatDays: 4, trend: 'down', interaction: 'FRESH', score: 5 },
+      { product: 'Crypto-Inventory and Discovery', tags: ['Rhea-All', 'Security'], designTeam: 2, designGaps: 2, health: 'WEAK', maturity: 'DEVELOPING', tat: '4 weeks', tatDays: 28, trend: 'up', interaction: 'STALE', score: 2 },
+      { product: 'Crypto-Simplification', tags: ['Security'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3 },
+      { product: 'Digital Sovereignty', tags: ['Rhea-LinuxONE'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3 },
+      { product: 'Getting Started', tags: ['Rhea-LinuxONE'], designTeam: 2, designGaps: 1, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2 },
+      { product: 'Haven', tags: ['Security'], designTeam: 1, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '6 weeks', tatDays: 42, trend: 'up', interaction: 'STALE', score: 0 },
+      { product: 'I/O Topology', tags: ['Rhea-All', 'Infrastructure Mgmt'], designTeam: 3, designGaps: 1, health: 'STRONG', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 4 },
+      { product: 'IBM LinuxONE Next', tags: ['Rhea-LinuxONE'], designTeam: 4, designGaps: 1, health: 'STRONG', maturity: 'ADVANCED', tat: '8 days', tatDays: 8, trend: 'down', interaction: 'FRESH', score: 4 },
+      { product: 'IBM Z Next', tags: ['Rhea-Z'], designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'ADVANCED', tat: '1 week', tatDays: 7, trend: 'down', interaction: 'FRESH', score: 4 },
+      { product: 'ICIC', tags: ['Rhea-All', 'Infrastructure Mgmt'], designTeam: 2, designGaps: 2, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2 },
+      { product: 'Infrastructure Foundation', tags: ['Rhea-All', 'Demeter-All'], designTeam: 2, designGaps: 2, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2 },
+      { product: 'Provable Value', tags: ['Rhea-All'], designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '5 days', tatDays: 5, trend: 'down', interaction: 'FRESH', score: 5 },
+      { product: 'Regulated Digital Assets', tags: ['Security'], designTeam: 4, designGaps: 0, health: 'STRONG', maturity: 'ESTABLISHED', tat: '9 days', tatDays: 9, trend: 'down', interaction: 'FRESH', score: 4 }
     ];
 
     let currentSort = { column: null, direction: 'asc' };
@@ -397,6 +400,9 @@
         } else if (column === 'designGaps' || column === 'tatDays' || column === 'score') {
           aVal = a[column];
           bVal = b[column];
+        } else if (column === 'tags') {
+          aVal = a[column].join(', ').toLowerCase();
+          bVal = b[column].join(', ').toLowerCase();
         } else {
           aVal = a[column].toLowerCase();
           bVal = b[column].toLowerCase();
@@ -427,18 +433,18 @@
       const tbody = document.getElementById('productTable');
       let filtered = products;
       
-      if (filter === 'wp') {
-        filtered = products.filter(p => p.parent.includes('WP'));
-      } else if (filter === 'non-pilot') {
-        filtered = products.filter(p => !p.parent.includes('WP') && !p.parent.includes('RHEA'));
-      } else if (filter === 'rhea') {
-        filtered = products.filter(p => p.parent.includes('RHEA'));
+      if (filter !== 'all') {
+        filtered = products.filter(p => p.tags.includes(filter));
       }
 
       tbody.innerHTML = filtered.map(p => `
         <tr>
           <td>${p.product}</td>
-          <td><span class="tag tag-gray">${p.parent}</span></td>
+          <td>
+            <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+              ${p.tags.map(tag => `<span class="tag tag-gray">${tag}</span>`).join('')}
+            </div>
+          </td>
           <td>
             <div class="design-lead">
               <div class="avatar">👤</div>
