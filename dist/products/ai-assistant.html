@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Assistant - Design Program Management</title>
+  <link rel="stylesheet" href="https://unpkg.com/carbon-components@10.59.2/css/carbon-components.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .app-container {
+      min-height: 100vh;
+      background-color: #ffffff;
+    }
+
+    .header {
+      padding: 2rem 2rem 1rem 2rem;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 400;
+      color: #161616;
+      cursor: pointer;
+    }
+
+    .header h1:hover {
+      color: #0f62fe;
+    }
+
+    .product-title {
+      padding: 1.5rem 2rem;
+      background-color: #f4f4f4;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .product-title h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: #161616;
+    }
+
+    .product-subtitle {
+      margin: 0;
+      font-size: 0.875rem;
+      color: #525252;
+    }
+
+    .section {
+      padding: 2rem;
+      background-color: #ffffff;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #161616;
+      margin: 0 0 1rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .indicator-category {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.32px;
+      text-transform: uppercase;
+      color: #0f62fe;
+      margin: 1.5rem 0 0.75rem 0;
+    }
+
+    .indicator-category:first-child {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      margin-bottom: 1rem;
+    }
+
+    thead {
+      background-color: #e0e0e0;
+    }
+
+    th {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.32px;
+      text-transform: uppercase;
+      color: #161616;
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #e0e0e0;
+      color: #161616;
+      font-size: 0.875rem;
+      vertical-align: top;
+    }
+
+    tbody tr:hover {
+      background-color: #e5e5e5;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 0.5rem;
+      height: 1.5rem;
+      font-size: 0.75rem;
+      font-weight: 400;
+      border-radius: 0.9375rem;
+      white-space: nowrap;
+    }
+
+    .tag-green {
+      background-color: #d4f1d4;
+      color: #0f6212;
+    }
+
+    .tag-yellow {
+      background-color: #fcf4d6;
+      color: #684e00;
+    }
+
+    .tag-red {
+      background-color: #ffd7d9;
+      color: #750e13;
+    }
+
+    .tag-gray {
+      background-color: #e0e0e0;
+      color: #161616;
+    }
+
+    .tag-cyan {
+      background-color: #bae6ff;
+      color: #003a6d;
+    }
+
+    .tag-purple {
+      background-color: #e8daff;
+      color: #491d8b;
+    }
+
+    .metric-value {
+      font-weight: 600;
+      color: #161616;
+    }
+
+    .team-avatars {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #8d8d8d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      border: 2px solid #ffffff;
+      margin-left: -4px;
+    }
+
+    .avatar:first-child {
+      margin-left: 0;
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    .status-green {
+      background-color: #24a148;
+    }
+
+    .status-yellow {
+      background-color: #f1c21b;
+    }
+
+    .status-red {
+      background-color: #da1e28;
+    }
+
+    .notes-text {
+      color: #525252;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="header">
+      <h1 onclick="window.location.href='../index.html'">← Design Program Management</h1>
+    </div>
+
+    <div class="product-title">
+      <h2>AI Assistant</h2>
+      <p class="product-subtitle">Rhea-All | NZLI</p>
+    </div>
+
+    <!-- Cornerstone Indicators -->
+    <div class="section">
+      <h3 class="section-title">Cornerstone Indicators</h3>
+      <p style="color: #525252; font-size: 0.875rem; margin-bottom: 1.5rem;">Critical data that's stable and always relevant</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%;">INDICATOR</th>
+            <th style="width: 50%;">VALUE / STATUS</th>
+            <th style="width: 20%;">LAST UPDATED</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Product/Project Objective</strong></td>
+            <td>Enable users to interact with IBM Z and LinuxONE systems through natural language, reducing complexity and accelerating time-to-value for common administrative tasks.</td>
+            <td>2026-03-15</td>
+          </tr>
+          <tr>
+            <td><strong>Product/Project Goals</strong></td>
+            <td>
+              • Reduce expert-step count by 40% for top 10 admin tasks<br>
+              • Achieve 85% task success rate in sponsor user testing<br>
+              • Enable field demos for 5 priority use cases by Q3 2026
+            </td>
+            <td>2026-03-15</td>
+          </tr>
+          <tr>
+            <td><strong>Product/Project Roadmap</strong></td>
+            <td><span class="tag tag-green">Available</span> <span class="notes-text">Linked in Aha!</span></td>
+            <td>2026-03-20</td>
+          </tr>
+          <tr>
+            <td><strong>D&UX Score</strong></td>
+            <td><span class="metric-value">4.2 / 5.0</span> <span class="tag tag-green">Strong</span></td>
+            <td>2026-02-28</td>
+          </tr>
+          <tr>
+            <td><strong>Team Headcount</strong></td>
+            <td>
+              <div class="team-avatars">
+                <div class="avatar">👤</div>
+                <div class="avatar">👤</div>
+                <div class="avatar">👤</div>
+              </div>
+              <span style="margin-left: 0.5rem;">3 designers</span><br>
+              <span class="tag tag-yellow" style="margin-top: 0.5rem;">1 Gap</span> <span class="notes-text">Need UX researcher</span>
+            </td>
+            <td>2026-03-22</td>
+          </tr>
+          <tr>
+            <td><strong>Stakeholder Map</strong></td>
+            <td><span class="tag tag-yellow">Moderate</span> <span class="notes-text">Available, needs fidelity improvement</span></td>
+            <td>2026-03-18</td>
+          </tr>
+          <tr>
+            <td><strong>Experience Architecture Maturity</strong></td>
+            <td><span class="metric-value" style="font-size: 1.5rem; color: #f1c21b;">3</span> <span class="tag tag-blue">Established</span></td>
+            <td>2026-03-10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Reference Indicators -->
+    <div class="section">
+      <h3 class="section-title">Reference Indicators</h3>
+      <p style="color: #525252; font-size: 0.875rem; margin-bottom: 1.5rem;">Rarely changing data with limited leadership utility</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%;">INDICATOR</th>
+            <th style="width: 50%;">VALUE / STATUS</th>
+            <th style="width: 20%;">LAST UPDATED</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Design Lead</strong></td>
+            <td>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div class="avatar">👤</div>
+                <span>Sarah Chen</span>
+              </div>
+            </td>
+            <td>2026-01-01</td>
+          </tr>
+          <tr>
+            <td><strong>Team Allocation</strong></td>
+            <td>
+              <table style="width: 100%; margin: 0; border: none;">
+                <thead style="background-color: #f4f4f4;">
+                  <tr>
+                    <th style="padding: 0.5rem; font-size: 0.75rem; border: none;">WORK EFFORT</th>
+                    <th style="padding: 0.5rem; font-size: 0.75rem; border: none;">DESIGNER</th>
+                    <th style="padding: 0.5rem; font-size: 0.75rem; border: none;">ALLOCATION</th>
+                    <th style="padding: 0.5rem; font-size: 0.75rem; border: none;">NEXT MILESTONE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background-color: transparent;">
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;"><strong>AI Assistant Core</strong></td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Sarah Chen</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">50%</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Sponsor User Program (Q2)</td>
+                  </tr>
+                  <tr style="background-color: transparent;">
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;"></td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Alex Kim</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">60%</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">High-fidelity prototype (April 15)</td>
+                  </tr>
+                  <tr style="background-color: transparent;">
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;"></td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Jordan Lee</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">70%</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Council validation (April 5)</td>
+                  </tr>
+                  <tr style="background-color: transparent;">
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;"><strong>Getting Started Experience</strong></td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Sarah Chen</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">25%</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Content overhaul (Q2)</td>
+                  </tr>
+                  <tr style="background-color: transparent;">
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;"><strong>Platform Consistency</strong></td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Alex Kim</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">20%</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Carbon adoption review (Q2)</td>
+                  </tr>
+                  <tr style="background-color: transparent;">
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;"><strong>Research & Innovation</strong></td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Sarah Chen</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">25%</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">ZDC deep-dive (Q3)</td>
+                  </tr>
+                  <tr style="background-color: transparent;">
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;"></td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Jordan Lee</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">30%</td>
+                    <td style="padding: 0.5rem; border: none; font-size: 0.75rem;">Futures exploration (Ongoing)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>2026-03-15</td>
+          </tr>
+          <tr>
+            <td><strong>Team Experience and Setup</strong></td>
+            <td>
+              • 1 Senior Designer (Band 9, 8 years at IBM)<br>
+              • 2 Designers (Band 8, 3-5 years at IBM)<br>
+              • Skills: Visual design, interaction design, prototyping, user research
+            </td>
+            <td>2026-03-01</td>
+          </tr>
+          <tr>
+            <td><strong>Time in Business Unit</strong></td>
+            <td><span class="metric-value">18 months</span></td>
+            <td>2026-03-01</td>
+          </tr>
+          <tr>
+            <td><strong>Design Health Assessment Score</strong></td>
+            <td>
+              <span class="metric-value">Overall: 13.2 / 15</span> <span class="tag tag-green">Maintain</span><br>
+              <span style="font-size: 0.75rem; color: #525252;">
+                • 3IAB Operations, Relationship and Collaboration: 4.5 / 5<br>
+                • Design Product: 4.2 / 5<br>
+                • Overall Team Dynamics and Health: 4.5 / 5
+              </span><br>
+              <span style="font-size: 0.75rem; color: #525252; margin-top: 0.5rem; display: block;">
+                <strong>Evaluation:</strong> >12.9 = Maintain | 9.15-12.9 = Minor adjustments | 4.65-9.14 = Major adjustments | <4.65 = Detailed evaluation
+              </span>
+            </td>
+            <td>2026-01-15</td>
+          </tr>
+          <tr>
+            <td><strong>Design Maturity</strong></td>
+            <td><span class="tag tag-blue">Established</span> <span class="notes-text">Experienced in EDT and user-centered practices</span></td>
+            <td>2026-01-15</td>
+          </tr>
+          <tr>
+            <td><strong>Design Integration</strong></td>
+            <td><span class="tag tag-green">Strong</span> <span class="notes-text">Well integrated with PM and Engineering</span></td>
+            <td>2026-01-15</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pulse Indicators -->
+    <div class="section">
+      <h3 class="section-title">Pulse Indicators</h3>
+      <p style="color: #525252; font-size: 0.875rem; margin-bottom: 1.5rem;">High impact data requiring constant monitoring and updates</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%;">INDICATOR</th>
+            <th style="width: 50%;">VALUE / STATUS</th>
+            <th style="width: 20%;">LAST UPDATED</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Customer Interactions</strong></td>
+            <td>
+              <span class="tag tag-green">Fresh</span><br>
+              <span style="font-size: 0.75rem; color: #525252;">
+                • Last session: 5 days ago<br>
+                • ZDC deep-dive: March 10, 2026<br>
+                • Next council session: April 5, 2026
+              </span>
+            </td>
+            <td>2026-03-20</td>
+          </tr>
+          <tr>
+            <td><strong>Customer Insight Impact</strong></td>
+            <td>
+              <span class="metric-value">12 days</span> average from insight to design iteration<br>
+              <span class="tag tag-green">Excellent</span>
+            </td>
+            <td>2026-03-22</td>
+          </tr>
+          <tr>
+            <td><strong>Design-Development TAT</strong></td>
+            <td>
+              <span class="metric-value">2 weeks</span> <span style="color: #24a148;">↓</span><br>
+              <span class="notes-text">Improved from 3 weeks last quarter</span>
+            </td>
+            <td>2026-03-22</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="indicator-category">Design Metrics - Outcome A: Increase Workloads</div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%;">METRIC</th>
+            <th style="width: 30%;">TARGET</th>
+            <th style="width: 20%;">CURRENT</th>
+            <th style="width: 20%;">LAST UPDATED</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Setup Clarity</strong></td>
+            <td>≥ 80% of sponsor users can explain steps</td>
+            <td><span class="metric-value">75%</span> <span class="tag tag-yellow">In Progress</span></td>
+            <td>2026-03-18</td>
+          </tr>
+          <tr>
+            <td><strong>Confidence After Action</strong></td>
+            <td>≥ 85% say "I did it right"</td>
+            <td><span class="metric-value">82%</span> <span class="tag tag-yellow">Near Target</span></td>
+            <td>2026-03-18</td>
+          </tr>
+          <tr>
+            <td><strong>Expert-Step Count</strong></td>
+            <td>Reduce by 40% (from 15 to 9 steps)</td>
+            <td><span class="metric-value">11 steps</span> <span class="tag tag-yellow">27% reduction</span></td>
+            <td>2026-03-20</td>
+          </tr>
+          <tr>
+            <td><strong>Task Success Rate</strong></td>
+            <td>≥ 85%</td>
+            <td><span class="metric-value">78%</span> <span class="tag tag-yellow">In Progress</span></td>
+            <td>2026-03-18</td>
+          </tr>
+          <tr>
+            <td><strong>System Usability Scale (SUS)</strong></td>
+            <td>≥ 75</td>
+            <td><span class="metric-value">72</span> <span class="tag tag-yellow">Near Target</span></td>
+            <td>2026-03-15</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="indicator-category">Design Metrics - Outcome B: Improve Time-to-Value</div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%;">METRIC</th>
+            <th style="width: 30%;">TARGET</th>
+            <th style="width: 20%;">CURRENT</th>
+            <th style="width: 20%;">LAST UPDATED</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Blockers Removed</strong></td>
+            <td>≥ 5 named blockers</td>
+            <td><span class="metric-value">3 blockers</span> <span class="tag tag-yellow">In Progress</span></td>
+            <td>2026-03-22</td>
+          </tr>
+          <tr>
+            <td><strong>Use-Case Enablement</strong></td>
+            <td>5 priority use cases</td>
+            <td><span class="metric-value">3 enabled</span> <span class="tag tag-yellow">60% complete</span></td>
+            <td>2026-03-20</td>
+          </tr>
+          <tr>
+            <td><strong>Standards Coverage</strong></td>
+            <td>≥ 3 flows using industry patterns</td>
+            <td><span class="metric-value">2 flows</span> <span class="tag tag-yellow">In Progress</span></td>
+            <td>2026-03-20</td>
+          </tr>
+          <tr>
+            <td><strong>Field-Demo Ready</strong></td>
+            <td>≥ 2 scripted demos</td>
+            <td><span class="metric-value">1 demo</span> <span class="tag tag-yellow">50% complete</span></td>
+            <td>2026-03-19</td>
+          </tr>
+          <tr>
+            <td><strong>Message-Experience Match</strong></td>
+            <td>0 mismatches (trend down)</td>
+            <td><span class="metric-value">2 mismatches</span> <span class="tag tag-yellow">Improving</span></td>
+            <td>2026-03-18</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Additional Context -->
+    <div class="section">
+      <h3 class="section-title">Additional Context</h3>
+      
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%;">ITEM</th>
+            <th style="width: 70%;">DETAILS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Key Dependencies</strong></td>
+            <td>
+              • Polaris platform APIs (Q2 2026)<br>
+              • Maestro orchestration layer (Q3 2026)<br>
+              • Natural language processing service (In development)
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Risk Areas</strong></td>
+            <td>
+              <span class="tag tag-yellow">Medium Risk</span> NLP accuracy for domain-specific commands<br>
+              <span class="tag tag-yellow">Medium Risk</span> Integration complexity with legacy systems
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Recent Wins</strong></td>
+            <td>
+              • Completed ZDC deep-dive with 12 sponsor users (March 10)<br>
+              • Reduced design-dev TAT from 3 weeks to 2 weeks<br>
+              • Validated 3 priority use cases with field teams
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Next Milestones</strong></td>
+            <td>
+              • Complete high-fidelity prototype (April 15, 2026)<br>
+              • Council validation session (April 5, 2026)<br>
+              • Field demo script finalization (April 30, 2026)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

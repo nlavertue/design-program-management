@@ -33,6 +33,11 @@
       font-size: 2rem;
       font-weight: 400;
       color: #161616;
+      cursor: pointer;
+    }
+
+    .header h1:hover {
+      color: #0f62fe;
     }
 
     .tabs {
@@ -210,6 +215,25 @@
       font-size: 0.875rem;
     }
 
+    /* Design Lead column - wider */
+    th:nth-child(3),
+    td:nth-child(3) {
+      width: 180px;
+    }
+
+    /* Narrow column for Design Gaps */
+    th:nth-child(5),
+    td:nth-child(5) {
+      width: 80px;
+      text-align: center;
+    }
+
+    /* Stakeholder Map Health column - narrower */
+    th:nth-child(6),
+    td:nth-child(6) {
+      width: 120px;
+    }
+
     tbody tr:hover {
       background-color: #e5e5e5;
     }
@@ -272,7 +296,7 @@
 
     .team-avatars {
       display: flex;
-      gap: 4px;
+      align-items: center;
     }
 
     .avatar {
@@ -285,6 +309,12 @@
       justify-content: center;
       color: white;
       font-size: 12px;
+      border: 2px solid #ffffff;
+      margin-left: -4px;
+    }
+
+    .avatar:first-child {
+      margin-left: 0;
     }
 
     .tat-cell {
@@ -322,6 +352,16 @@
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+
+    .product-link {
+      color: #0f62fe;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .product-link:hover {
+      text-decoration: underline;
     }
 
     .metrics-section {
@@ -387,6 +427,74 @@
     .metrics-section input[type="number"]::-webkit-outer-spin-button {
       opacity: 1;
     }
+
+    /* Tooltip styles */
+    .tooltip-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip-text {
+      visibility: hidden;
+      width: 300px;
+      background-color: #161616;
+      color: #ffffff;
+      text-align: left;
+      border-radius: 4px;
+      padding: 0.75rem;
+      position: absolute;
+      z-index: 1000;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -150px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.75rem;
+      line-height: 1.4;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #161616 transparent transparent transparent;
+    }
+
+    .tooltip-container:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    td .tooltip-container {
+      cursor: help;
+    }
+
+    /* Warning indicator for missing DPIs */
+    .warning-indicator {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      background-color: #da1e28;
+      color: #ffffff;
+      border-radius: 50%;
+      font-size: 14px;
+      font-weight: bold;
+      margin-left: 0.5rem;
+      cursor: help;
+      position: relative;
+    }
+
+    .warning-indicator .tooltip-text {
+      width: 250px;
+      margin-left: -125px;
+    }
   </style>
 </head>
 <body>
@@ -440,7 +548,7 @@
         <div class="summary-value">7</div>
       </div>
       <div class="summary-card">
-        <div class="summary-label">UNDOCUMENTED MARKERS</div>
+        <div class="summary-label">UNDOCUMENTED DESIGN PROGRAM INDICATORS</div>
         <div class="summary-value red">8</div>
       </div>
     </div>
@@ -477,52 +585,57 @@
               <th>METRIC</th>
               <th>VALUE</th>
               <th>NOTES</th>
+              <th>LAST UPDATED</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>1. # of User-Driven Outcomes</strong></td>
-              <td><input type="text" class="metric-cell-input" placeholder="Enter value"></td>
-              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+              <td>42</td>
+              <td>Sample notes for user-driven outcomes metric</td>
+              <td>2026-03-20</td>
             </tr>
             <tr>
               <td style="padding-left: 2rem;">a. # of Roadmap Pivots</td>
-              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
-              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+              <td>8</td>
+              <td>Sample notes for roadmap pivots</td>
+              <td>2026-03-20</td>
             </tr>
             <tr>
               <td style="padding-left: 2rem;">b. # of Enhancements Added</td>
-              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
-              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+              <td>15</td>
+              <td>Sample notes for enhancements</td>
+              <td>2026-03-20</td>
             </tr>
             <tr>
               <td style="padding-left: 2rem;">c. # of Innovations Added</td>
-              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
-              <td><input type="text" class="metric-cell-input" placeholder="How do you measure this?"></td>
+              <td>19</td>
+              <td>Sample notes for innovations</td>
+              <td>2026-03-20</td>
             </tr>
             <tr>
               <td><strong>2. # of Reference Candidates</strong></td>
-              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
-              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+              <td>12</td>
+              <td>Sample notes for reference candidates</td>
+              <td>2026-03-18</td>
             </tr>
             <tr>
-              <td><strong>3. Sponsor User Companies, Industry, Geos</strong></td>
-              <td colspan="2"><textarea class="metric-textarea" placeholder="Enter sponsor user companies, industries, and geographic locations"></textarea></td>
+              <td><strong>3. # of SU Engaged</strong></td>
+              <td>25</td>
+              <td>Sample notes for sponsor users engaged</td>
+              <td>2026-03-15</td>
             </tr>
             <tr>
-              <td><strong>4. # of SU Engaged</strong></td>
-              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
-              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+              <td><strong>4. # of Engagements</strong></td>
+              <td>87</td>
+              <td>Sample notes for total engagements</td>
+              <td>2026-03-22</td>
             </tr>
             <tr>
-              <td><strong>5. # of Engagements</strong></td>
-              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
-              <td><input type="text" class="metric-cell-input" placeholder="Research hours?"></td>
-            </tr>
-            <tr>
-              <td><strong>6. # of Clients in Top 80% Rev List</strong></td>
-              <td><input type="number" class="metric-cell-input" placeholder="0"></td>
-              <td><input type="text" class="metric-cell-input" placeholder="Add notes"></td>
+              <td><strong>5. # of Clients in Top 80% Rev List</strong></td>
+              <td>34</td>
+              <td>Sample notes for top revenue clients</td>
+              <td>2026-03-19</td>
             </tr>
           </tbody>
         </table>
@@ -532,24 +645,50 @@
 
   <script>
     let products = [
-      { product: 'AI Assistant', tags: ['Rhea-All'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3 },
-      { product: 'Application Control Center', tags: ['Rhea-All'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '10 days', tatDays: 10, trend: 'down', interaction: 'FRESH', score: 3 },
-      { product: 'Canton', tags: ['Rhea-LinuxONE'], designTeam: 2, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '1 month', tatDays: 30, trend: 'up', interaction: 'STALE', score: 1 },
-      { product: 'Commercial Experience', tags: ['Rhea-All'], designTeam: 4, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '1 month', tatDays: 30, trend: 'up', interaction: 'STALE', score: 1 },
-      { product: 'Confidential Computing', tags: ['Rhea-All', 'Security'], designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '6 days', tatDays: 6, trend: 'down', interaction: 'FRESH', score: 5 },
-      { product: 'Content Overhaul', tags: ['Rhea-LinuxONE'], designTeam: 4, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '4 days', tatDays: 4, trend: 'down', interaction: 'FRESH', score: 5 },
-      { product: 'Crypto-Inventory and Discovery', tags: ['Rhea-All', 'Security'], designTeam: 2, designGaps: 2, health: 'WEAK', maturity: 'DEVELOPING', tat: '4 weeks', tatDays: 28, trend: 'up', interaction: 'STALE', score: 2 },
-      { product: 'Crypto-Simplification', tags: ['Security'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3 },
-      { product: 'Digital Sovereignty', tags: ['Rhea-LinuxONE'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3 },
-      { product: 'Getting Started', tags: ['Rhea-LinuxONE'], designTeam: 2, designGaps: 1, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2 },
-      { product: 'Haven', tags: ['Security'], designTeam: 1, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '6 weeks', tatDays: 42, trend: 'up', interaction: 'STALE', score: 0 },
-      { product: 'I/O Topology', tags: ['Rhea-All', 'Infrastructure Mgmt'], designTeam: 3, designGaps: 1, health: 'STRONG', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 4 },
-      { product: 'IBM LinuxONE Next', tags: ['Rhea-LinuxONE'], designTeam: 4, designGaps: 1, health: 'STRONG', maturity: 'ADVANCED', tat: '8 days', tatDays: 8, trend: 'down', interaction: 'FRESH', score: 4 },
-      { product: 'IBM Z Next', tags: ['Rhea-Z'], designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'ADVANCED', tat: '1 week', tatDays: 7, trend: 'down', interaction: 'FRESH', score: 4 },
-      { product: 'ICIC', tags: ['Rhea-All', 'Infrastructure Mgmt'], designTeam: 2, designGaps: 2, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2 },
-      { product: 'Infrastructure Foundation', tags: ['Rhea-All', 'Demeter-All'], designTeam: 2, designGaps: 2, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2 },
-      { product: 'Provable Value', tags: ['Rhea-All'], designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '5 days', tatDays: 5, trend: 'down', interaction: 'FRESH', score: 5 },
-      { product: 'Regulated Digital Assets', tags: ['Security'], designTeam: 4, designGaps: 0, health: 'STRONG', maturity: 'ESTABLISHED', tat: '9 days', tatDays: 9, trend: 'down', interaction: 'FRESH', score: 4 }
+      { product: 'AI Assistant', tags: ['Rhea-All'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3,
+        gapDetail: 'Need UX researcher', healthDetail: 'Available, needs fidelity improvement', maturityDetail: 'Experienced in EDT and user-centered practices', tatDetail: 'Improved from 3 weeks last quarter', interactionDetail: 'Last session: 5 days ago | ZDC deep-dive: March 10', scoreDetail: 'Established level with strong foundation',
+        missingDPIs: ['D&UX Score'] },
+      { product: 'Application Control Center', tags: ['Rhea-All'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '10 days', tatDays: 10, trend: 'down', interaction: 'FRESH', score: 3,
+        gapDetail: 'Need senior interaction designer', healthDetail: 'Map exists but needs quarterly updates', maturityDetail: 'Strong EDT practices, growing research capability', tatDetail: 'Steady improvement over past 6 months', interactionDetail: 'Council session: 2 weeks ago', scoreDetail: 'Consistent patterns across flows' },
+      { product: 'Canton', tags: ['Rhea-LinuxONE'], designTeam: 2, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '1 month', tatDays: 30, trend: 'up', interaction: 'STALE', score: 1,
+        gapDetail: 'Need visual designer and UX researcher', healthDetail: 'Stakeholder map incomplete, missing key partners', maturityDetail: 'New team, building EDT foundation', tatDetail: 'Increased due to dependency delays', interactionDetail: 'Last customer contact: 45 days ago', scoreDetail: 'Early stage, establishing patterns',
+        missingDPIs: ['Product Roadmap', 'D&UX Score'] },
+      { product: 'Commercial Experience', tags: ['Rhea-All'], designTeam: 4, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '1 month', tatDays: 30, trend: 'up', interaction: 'STALE', score: 1,
+        gapDetail: 'Need content strategist and UX researcher', healthDetail: 'Map outdated, needs stakeholder realignment', maturityDetail: 'Team restructured, rebuilding practices', tatDetail: 'Blocked by platform dependencies', interactionDetail: 'No recent customer sessions scheduled', scoreDetail: 'Inconsistent patterns, needs architecture work',
+        missingDPIs: ['Product Objectives', 'Design Health Assessment'] },
+      { product: 'Confidential Computing', tags: ['Rhea-All', 'Security'], designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '6 days', tatDays: 6, trend: 'down', interaction: 'FRESH', score: 5,
+        gapDetail: 'Team fully staffed', healthDetail: 'Comprehensive map, updated monthly', maturityDetail: 'Advanced EDT, strong research integration', tatDetail: 'Excellent collaboration with dev team', interactionDetail: 'Weekly sponsor user sessions', scoreDetail: 'Industry-leading patterns and consistency' },
+      { product: 'Content Overhaul', tags: ['Rhea-LinuxONE'], designTeam: 4, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '4 days', tatDays: 4, trend: 'down', interaction: 'FRESH', score: 5,
+        gapDetail: 'Team fully staffed', healthDetail: 'Well-maintained map with clear ownership', maturityDetail: 'Mature practices, strong content strategy', tatDetail: 'Streamlined handoff process', interactionDetail: 'LinuxONE Select: ongoing engagement', scoreDetail: 'Comprehensive content architecture' },
+      { product: 'Crypto-Inventory and Discovery', tags: ['Rhea-All', 'Security'], designTeam: 2, designGaps: 2, health: 'WEAK', maturity: 'DEVELOPING', tat: '4 weeks', tatDays: 28, trend: 'up', interaction: 'STALE', score: 2,
+        gapDetail: 'Need senior designer and researcher', healthDetail: 'Map exists but lacks detail', maturityDetail: 'Growing EDT adoption, needs mentorship', tatDetail: 'Extended due to security review cycles', interactionDetail: 'Last session: 6 weeks ago', scoreDetail: 'Patterns emerging but not consistent',
+        missingDPIs: ['D&UX Score'] },
+      { product: 'Crypto-Simplification', tags: ['Security'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3,
+        gapDetail: 'Need UX writer for technical content', healthDetail: 'Map current, quarterly review cadence', maturityDetail: 'Solid EDT foundation, strong collaboration', tatDetail: 'Consistent delivery pace', interactionDetail: 'Security council: 10 days ago', scoreDetail: 'Good patterns, room for refinement' },
+      { product: 'Digital Sovereignty', tags: ['Rhea-LinuxONE'], designTeam: 3, designGaps: 1, health: 'MODERATE', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 3,
+        gapDetail: 'Need researcher for sovereignty requirements', healthDetail: 'Map adequate, needs geo-specific updates', maturityDetail: 'Strong practices, expanding research', tatDetail: 'Stable delivery rhythm', interactionDetail: 'Virtual session: April scheduled', scoreDetail: 'Consistent approach across regions' },
+      { product: 'Getting Started', tags: ['Rhea-LinuxONE'], designTeam: 2, designGaps: 1, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2,
+        gapDetail: 'Need content designer', healthDetail: 'Map exists, needs content strategy alignment', maturityDetail: 'Building EDT practices, learning phase', tatDetail: 'Longer cycles due to content dependencies', interactionDetail: 'Last feedback: 5 weeks ago', scoreDetail: 'Patterns developing, needs consistency',
+        missingDPIs: ['Product Roadmap'] },
+      { product: 'Haven', tags: ['Security'], designTeam: 1, designGaps: 2, health: 'WEAK', maturity: 'FOUNDATIONAL', tat: '6 weeks', tatDays: 42, trend: 'up', interaction: 'STALE', score: 0,
+        gapDetail: 'Need 2 designers (visual + interaction)', healthDetail: 'No stakeholder map documented', maturityDetail: 'Solo designer, needs team and process', tatDetail: 'Extended cycles, resource constrained', interactionDetail: 'No customer sessions in 60+ days', scoreDetail: 'No architecture established yet',
+        missingDPIs: ['Product Objectives', 'Product Roadmap', 'D&UX Score', 'Design Health Assessment'] },
+      { product: 'I/O Topology', tags: ['Rhea-All', 'Infrastructure Mgmt'], designTeam: 3, designGaps: 1, health: 'STRONG', maturity: 'ESTABLISHED', tat: '2 weeks', tatDays: 14, trend: 'down', interaction: 'FRESH', score: 4,
+        gapDetail: 'Need systems designer for complex flows', healthDetail: 'Comprehensive map, well-maintained', maturityDetail: 'Strong technical design practices', tatDetail: 'Efficient collaboration with infrastructure team', interactionDetail: 'Technical council: last week', scoreDetail: 'Advanced patterns for complex systems' },
+      { product: 'IBM LinuxONE Next', tags: ['Rhea-LinuxONE'], designTeam: 4, designGaps: 1, health: 'STRONG', maturity: 'ADVANCED', tat: '8 days', tatDays: 8, trend: 'down', interaction: 'FRESH', score: 4,
+        gapDetail: 'Need researcher for market expansion', healthDetail: 'Detailed map with ecosystem partners', maturityDetail: 'Advanced practices, strong research culture', tatDetail: 'Excellent dev partnership', interactionDetail: 'LinuxONE Select: active engagement', scoreDetail: 'Mature architecture, consistent patterns' },
+      { product: 'IBM Z Next', tags: ['Rhea-Z'], designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'ADVANCED', tat: '1 week', tatDays: 7, trend: 'down', interaction: 'FRESH', score: 4,
+        gapDetail: 'Team fully staffed', healthDetail: 'Comprehensive map, executive alignment', maturityDetail: 'Advanced EDT, strong cross-functional collaboration', tatDetail: 'Streamlined process, excellent velocity', interactionDetail: 'ZDC: ongoing partnership', scoreDetail: 'Sophisticated architecture, industry patterns' },
+      { product: 'ICIC', tags: ['Rhea-All', 'Infrastructure Mgmt'], designTeam: 2, designGaps: 2, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2,
+        gapDetail: 'Need senior designer and technical writer', healthDetail: 'Map exists, needs infrastructure detail', maturityDetail: 'Growing practices, needs senior guidance', tatDetail: 'Longer cycles due to technical complexity', interactionDetail: 'Last session: 4 weeks ago', scoreDetail: 'Patterns emerging, needs refinement',
+        missingDPIs: ['D&UX Score'] },
+      { product: 'Infrastructure Foundation', tags: ['Rhea-All', 'Demeter-All'], designTeam: 2, designGaps: 2, health: 'MODERATE', maturity: 'DEVELOPING', tat: '3 weeks', tatDays: 21, trend: 'up', interaction: 'STALE', score: 2,
+        gapDetail: 'Need infrastructure designer and systems architect', healthDetail: 'Map exists, needs cross-platform alignment', maturityDetail: 'Building practices across Rhea and Demeter', tatDetail: 'Complex dependencies causing delays', interactionDetail: 'Last session: 5 weeks ago', scoreDetail: 'Foundation patterns being established',
+        missingDPIs: ['Product Roadmap', 'Design Health Assessment'] },
+      { product: 'Provable Value', tags: ['Rhea-All'], designTeam: 5, designGaps: 0, health: 'STRONG', maturity: 'LEADING', tat: '5 days', tatDays: 5, trend: 'down', interaction: 'FRESH', score: 5,
+        gapDetail: 'Team fully staffed', healthDetail: 'Comprehensive map with executive visibility', maturityDetail: 'Leading practices, strong data-driven approach', tatDetail: 'Exceptional collaboration and velocity', interactionDetail: 'Continuous customer engagement program', scoreDetail: 'Best-in-class architecture and patterns' },
+      { product: 'Regulated Digital Assets', tags: ['Security'], designTeam: 4, designGaps: 0, health: 'STRONG', maturity: 'ESTABLISHED', tat: '9 days', tatDays: 9, trend: 'down', interaction: 'FRESH', score: 4,
+        gapDetail: 'Team fully staffed', healthDetail: 'Detailed map with regulatory stakeholders', maturityDetail: 'Strong practices, compliance-focused', tatDetail: 'Efficient process with security reviews', interactionDetail: 'Financial services council: active', scoreDetail: 'Mature patterns for regulated environments' }
     ];
 
     let currentSort = { column: null, direction: 'asc' };
@@ -644,7 +783,18 @@
 
       tbody.innerHTML = filtered.map(p => `
         <tr>
-          <td>${p.product}</td>
+          <td>
+            ${p.product === 'AI Assistant' ? `<a href="products/ai-assistant.html" class="product-link">${p.product}</a>` : p.product}
+            ${p.missingDPIs && p.missingDPIs.length > 0 ? `
+              <span class="warning-indicator tooltip-container">
+                !
+                <span class="tooltip-text">
+                  <strong>Missing DPIs (${p.missingDPIs.length}):</strong><br>
+                  ${p.missingDPIs.map(dpi => `• ${dpi}`).join('<br>')}
+                </span>
+              </span>
+            ` : ''}
+          </td>
           <td>
             <div style="display: flex; gap: 4px; flex-wrap: wrap;">
               ${p.tags.map(tag => `<span class="tag tag-gray">${tag}</span>`).join('')}
@@ -661,20 +811,64 @@
               ${Array.from({length: p.designTeam}).map(() => '<div class="avatar">👤</div>').join('')}
             </div>
           </td>
-          <td>${p.designGaps}</td>
-          <td>${getHealthTag(p.health)}</td>
-          <td>${getMaturityTag(p.maturity)}</td>
           <td>
-            <div class="tat-cell">
-              <span>${p.tat}</span>
-              <span class="arrow-${p.trend}">${p.trend === 'down' ? '↓' : '↑'}</span>
+            <div class="tooltip-container">
+              ${p.designGaps}
+              <span class="tooltip-text">
+                <strong>Design Gaps:</strong> ${p.designGaps}<br>
+                ${p.gapDetail || 'No details available'}
+              </span>
             </div>
           </td>
-          <td>${getInteractionTag(p.interaction)}</td>
           <td>
-            <span class="maturity-score maturity-${p.score >= 4 ? 'high' : p.score >= 3 ? 'medium' : 'low'}">
-              ${p.score}
-            </span>
+            <div class="tooltip-container">
+              ${getHealthTag(p.health)}
+              <span class="tooltip-text">
+                <strong>Stakeholder Map:</strong> ${p.health}<br>
+                ${p.healthDetail || 'No details available'}
+              </span>
+            </div>
+          </td>
+          <td>
+            <div class="tooltip-container">
+              ${getMaturityTag(p.maturity)}
+              <span class="tooltip-text">
+                <strong>Team Maturity:</strong> ${p.maturity}<br>
+                ${p.maturityDetail || 'No details available'}
+              </span>
+            </div>
+          </td>
+          <td>
+            <div class="tooltip-container">
+              <div class="tat-cell">
+                <span>${p.tat}</span>
+                <span class="arrow-${p.trend}">${p.trend === 'down' ? '↓' : '↑'}</span>
+              </div>
+              <span class="tooltip-text">
+                <strong>Design-Dev TAT:</strong> ${p.tat}<br>
+                ${p.tatDetail || 'No details available'}
+              </span>
+            </div>
+          </td>
+          <td>
+            <div class="tooltip-container">
+              ${getInteractionTag(p.interaction)}
+              <span class="tooltip-text">
+                <strong>Customer Interaction:</strong> ${p.interaction}<br>
+                ${p.interactionDetail || 'No details available'}
+              </span>
+            </div>
+          </td>
+          <td>
+            <div class="tooltip-container">
+              <span class="maturity-score maturity-${p.score >= 4 ? 'high' : p.score >= 3 ? 'medium' : 'low'}">
+                ${p.score}
+              </span>
+              <span class="tooltip-text">
+                <strong>XA Maturity:</strong> ${p.score}/5<br>
+                ${p.scoreDetail || 'No details available'}
+              </span>
+            </div>
           </td>
         </tr>
       `).join('');
