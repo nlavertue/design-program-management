@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Design Program Management - Carbon Design System</title>
+  <title>Design Program Management</title>
   <link rel="stylesheet" href="https://unpkg.com/carbon-components@10.59.2/css/carbon-components.min.css">
   <style>
     * {
@@ -105,6 +105,16 @@
 
     .metric-input::placeholder {
       color: #a8a8a8;
+    }
+
+    .metric-content {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #161616;
+      line-height: 1.5;
+      border-left: 3px solid #0f62fe;
     }
 
     .summary-cards {
@@ -397,12 +407,26 @@
 
     <div class="north-star-metrics">
       <div class="metric-input-group">
-        <label for="northStarZ" class="metric-label">NORTH STAR METRIC Z</label>
-        <input type="text" id="northStarZ" class="metric-input" placeholder="Enter metric value">
+        <div class="metric-label">NORTH STAR METRIC Z</div>
+        <div class="metric-content">
+          Stabilize IBM Z clients with low growth trajectories while leveraging the ecosystem to retain clients.
+          <ul style="margin-top: 0.75rem; margin-bottom: 0;">
+            <li><strong>Acceleration Strategy</strong><br>Clients already expanding on IBM Z</li>
+            <li style="margin-top: 0.5rem;"><strong>Stabilization Strategy</strong><br>Clients with low growth trajectory</li>
+            <li style="margin-top: 0.5rem;"><strong>Ecosystem Leverage</strong><br>Established BPs, ISVs, and GSI</li>
+          </ul>
+        </div>
       </div>
       <div class="metric-input-group">
-        <label for="northStarLinuxONE" class="metric-label">NORTH STAR METRIC LINUXONE</label>
-        <input type="text" id="northStarLinuxONE" class="metric-input" placeholder="Enter metric value">
+        <div class="metric-label">NORTH STAR METRIC LINUXONE</div>
+        <div class="metric-content">
+          Drive growth with LinuxONE by acquiring new clients and expanding within IBM Z's workload base.
+          <ul style="margin-top: 0.75rem; margin-bottom: 0;">
+            <li><strong>Growth Strategy</strong><br>New clients - Regulated/Consolidation/aaS</li>
+            <li style="margin-top: 0.5rem;"><strong>Expansion Opportunity</strong><br>Existing IBM Z clients running x86 workloads</li>
+            <li style="margin-top: 0.5rem;"><strong>LinuxONE Ecosystem</strong><br>ISVs, Distros (Red Hat, SUSE, and Canonical), Partner Plus (Distributors and Business Partners)</li>
+          </ul>
+        </div>
       </div>
     </div>
 
